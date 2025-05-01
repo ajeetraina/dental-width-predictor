@@ -85,10 +85,10 @@ def classify_teeth(image, contours):
         intensity_mean = np.mean(roi_pixels) if len(roi_pixels) > 0 else 0
         intensity_std = np.std(roi_pixels) if len(roi_pixels) > 0 else 0
         
-        # Calculate texture features
-        glcm = feature.graycomatrix(roi, [1], [0, np.pi/4, np.pi/2, 3*np.pi/4], levels=256, symmetric=True, normed=True)
-        contrast = feature.graycoprops(glcm, 'contrast').mean()
-        homogeneity = feature.graycoprops(glcm, 'homogeneity').mean()
+        # Calculate basic texture features (simplified to avoid compatibility issues)
+        # Instead of GLCM, use simpler texture measures
+        texture_contrast = intensity_std
+        texture_homogeneity = 1.0 / (1.0 + texture_contrast) if texture_contrast > 0 else 1.0
         
         # Improved classification using multiple features
         # Primary molars tend to be larger, more rounded, and have different texture than premolars
@@ -99,12 +99,12 @@ def classify_teeth(image, contours):
         # Multi-feature classification
         if "upper" in position:
             # Classification criteria for upper jaw teeth
-            if area > 2000 and compactness > 0.3 and contrast < 10:
+            if area > 2000 and compactness > 0.3 and texture_contrast < 50:
                 if relative_y > 0.7:  # Lower in the upper jaw (closer to occlusal plane)
                     tooth_type = "primary_molar"
                 else:
                     tooth_type = "premolar"
-            elif area > 1000 and area < 2500 and homogeneity > 0.5:
+            elif area > 1000 and area < 2500 and texture_homogeneity > 0.5:
                 tooth_type = "premolar"
             elif area > 1500 and intensity_mean > 100:
                 if w > h:  # Wider than tall, likely a molar
@@ -113,12 +113,12 @@ def classify_teeth(image, contours):
                     tooth_type = "premolar"
         else:
             # Classification criteria for lower jaw teeth
-            if area > 2000 and compactness > 0.3 and contrast < 10:
+            if area > 2000 and compactness > 0.3 and texture_contrast < 50:
                 if relative_y < 0.5:  # Higher in the lower jaw (closer to occlusal plane)
                     tooth_type = "primary_molar"
                 else:
                     tooth_type = "premolar"
-            elif area > 1000 and area < 2500 and homogeneity > 0.5:
+            elif area > 1000 and area < 2500 and texture_homogeneity > 0.5:
                 tooth_type = "premolar"
             elif area > 1500 and intensity_mean > 100:
                 if w > h:  # Wider than tall, likely a molar
