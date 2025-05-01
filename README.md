@@ -60,6 +60,7 @@ graph TD
 - Measurement of tooth width at the widest point (contact points)
 - Calculation of width differences
 - Visualization of measurements
+- Batch processing for multiple images
 
 ## System Architecture
 
@@ -124,11 +125,47 @@ pip install -r requirements.txt
 
 ## Usage
 
+### Processing a Single Image
+
 ```bash
-python src/main.py --image path/to/radiograph.jpg
+python src/main.py --image path/to/radiograph.jpg --output results/output.jpg
 ```
 
-Or use the provided Jupyter notebooks in the `notebooks` directory for interactive analysis.
+### Processing Multiple Images (Batch Processing)
+
+For datasets with multiple images (20-30 images):
+
+```bash
+# Place your images in the data directory
+mkdir -p data/my_radiographs
+# Copy your images to data/my_radiographs/
+
+# Run batch processing
+python src/batch_processing.py --input data/my_radiographs --output results
+```
+
+This will:
+1. Process each image in the directory
+2. Save visualizations showing measurements
+3. Save detailed measurement data as JSON files
+4. Generate a CSV summary of all measurements
+
+### Analyzing Results
+
+After batch processing, you'll find in the `results` directory:
+- `*_visualization.jpg`: Visual representation of detected teeth and measurements
+- `*_measurements.json`: Detailed measurement data in JSON format
+- `measurements_summary.csv`: Combined data from all images for statistical analysis
+
+## Dataset Preparation
+
+For best results with your dataset:
+
+1. **Image Format**: Use high-quality JPEG, PNG, or TIFF format
+2. **Resolution**: Higher resolution provides more accurate measurements
+3. **Orientation**: Ensure panoramic radiographs are properly oriented
+4. **File Naming**: Use consistent naming (e.g., `patient001.jpg`, `patient002.jpg`)
+5. **Metadata**: Consider creating a CSV with additional information (e.g., patient age)
 
 ## Project Structure
 
@@ -142,6 +179,7 @@ dental-width-predictor/
 │   ├── detection/      # Tooth detection algorithms
 │   ├── measurement/    # Width measurement tools
 │   ├── utils/          # Utility functions
+│   ├── batch_processing.py # Module for processing multiple images
 │   └── main.py         # Main entry point
 ├── tests/              # Unit tests
 └── requirements.txt    # Dependencies
