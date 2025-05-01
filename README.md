@@ -61,6 +61,7 @@ graph TD
 - Calculation of width differences
 - Visualization of measurements
 - Batch processing for multiple images
+- Interactive web dashboard for result visualization
 
 ## System Architecture
 
@@ -150,12 +151,65 @@ This will:
 3. Save detailed measurement data as JSON files
 4. Generate a CSV summary of all measurements
 
-### Analyzing Results
+### Interactive Dashboard
 
-After batch processing, you'll find in the `results` directory:
-- `*_visualization.jpg`: Visual representation of detected teeth and measurements
-- `*_measurements.json`: Detailed measurement data in JSON format
-- `measurements_summary.csv`: Combined data from all images for statistical analysis
+The project includes an interactive web dashboard for visualizing results across all images:
+
+```bash
+# Process images and launch dashboard
+python src/dashboard.py --input data/samples --results results
+
+# To serve the dashboard on a specific port
+python src/dashboard.py --input data/samples --results results --serve --port 8080
+```
+
+The dashboard provides:
+
+- Summary statistics across all measurements
+- Interactive visualizations (histograms, scatter plots, bar charts)
+- Image gallery of all processed radiographs
+- Detailed measurements for each tooth pair
+- Raw data table for further analysis
+
+#### Dashboard Features
+
+The dashboard is organized into three main sections:
+
+1. **Summary Statistics**:
+   - Average primary molar width
+   - Average premolar width
+   - Average width difference
+   - Standard deviation of measurements
+
+2. **Visualizations Tab**:
+   - Histogram showing distribution of width differences
+   - Scatter plot of primary molar width vs. premolar width
+   - Bar chart showing width differences by tooth position
+
+3. **Image Gallery Tab**:
+   - Visual results for each processed radiograph
+   - Click "View Details" to see specific measurements for each image
+
+4. **Raw Data Tab**:
+   - Complete table of all measurements
+   - Sortable and searchable for data analysis
+
+## Analyzing Your Uploaded Images
+
+To analyze the images you've uploaded to the `data/samples` directory:
+
+```bash
+# Process all uploaded images and generate dashboard
+python src/dashboard.py --input data/samples --results results --serve
+```
+
+This will:
+1. Process all images in data/samples
+2. Generate visualizations and measurements
+3. Create an interactive dashboard
+4. Open the dashboard in your web browser
+
+The dashboard will provide comprehensive analysis of all your images, including statistical summaries and visualizations of the width differences between primary second molars and second premolars.
 
 ## Dataset Management
 
@@ -233,12 +287,14 @@ dental-width-predictor/
 │   └── my_radiographs/ # Your dataset (not tracked by Git)
 ├── models/             # Pre-trained models for tooth detection
 ├── notebooks/          # Jupyter notebooks for visualization and testing
+├── results/            # Output directory for processed images and dashboard
 ├── src/                # Source code
 │   ├── preprocessing/  # Image preprocessing modules
 │   ├── detection/      # Tooth detection algorithms
 │   ├── measurement/    # Width measurement tools
 │   ├── utils/          # Utility functions
 │   ├── batch_processing.py # Module for processing multiple images
+│   ├── dashboard.py    # Interactive web dashboard
 │   └── main.py         # Main entry point
 ├── tests/              # Unit tests
 └── requirements.txt    # Dependencies
@@ -252,6 +308,7 @@ dental-width-predictor/
 4. **Width Measurement**: Measure the width at the widest points (contact points)
 5. **Difference Calculation**: Calculate the width difference between corresponding teeth
 6. **Visualization**: Display results with overlays showing measurements
+7. **Dashboard**: Aggregate results across all images for comprehensive analysis
 
 ## License
 
