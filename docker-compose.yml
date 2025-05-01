@@ -9,6 +9,7 @@ services:
     volumes:
       - ./data:/app/data
       - ./results:/app/results
+      - ./models:/app/models
     ports:
       - "8000:8000"
     environment:
@@ -21,3 +22,8 @@ services:
     # command: batch data/my_radiographs results
     # For single image processing:
     # command: process data/samples/sample1.jpg results/output.jpg
+    #
+    # For ML-based processing (with trained models):
+    # command: ml-process data/samples/sample1.jpg results/output_ml.jpg
+    # For training ML models:
+    # command: ml-train data/training models
