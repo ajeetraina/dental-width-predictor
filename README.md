@@ -190,8 +190,51 @@ Summary saved to /app/results/measurements_summary.csv
 Processing complete!
 ```
 
+For every image, it creates JSON file as shown:
 
-## Installation
+```
+DR KASHINATH MR_2014_01_01_2D_Image_Shot_visualization.jpg
+SONIA 8 YRS FEMALE_DR MADHU C_2016_01_01_2D_Image_Shot_debug
+SONIA 8 YRS FEMALE_DR MADHU C_2016_01_01_2D_Image_Shot_measurements.json
+SONIA 8 YRS FEMALE_DR MADHU C_2016_01_01_2D_Image_Shot_visualization.jpg
+SUPRATHI R 11 YERAS FEMALE_DR RAVINDRA S_2014_06_30_2D_Image_Shot_debug
+SUPRATHI R 11 YERAS FEMALE_DR RAVINDRA S_2014_06_30_2D_Image_Shot_measurements.json
+SUPRATHI R 11 YERAS FEMALE_DR RAVINDRA S_2014_06_30_2D_Image_Shot_visualization.jpg
+TANVI 7 YEARS FEMALE_DR RATAN SALECHA_2016_01_01_2D_Image_Shot_debug
+TANVI 7 YEARS FEMALE_DR RATAN SALECHA_2016_01_01_2D_Image_Shot_measurements.json
+TANVI 7 YEARS FEMALE_DR RATAN SALECHA_2016_01_01_2D_Image_Shot_visualization.jpg
+VARUN PRASAD 11 YRS MALE_DR SANJANA VSDC_2013_10_22_2D_Image_Shot_debug
+VARUN PRASAD 11 YRS MALE_DR SANJANA VSDC_2013_10_22_2D_Image_Shot_measurements.json
+VARUN PRASAD 11 YRS MALE_DR SANJANA VSDC_2013_10_22_2D_Image_Shot_visualization.jpg
+dashboard.html
+measurements_summary.csv
+```
+
+Let's verify what content does these JSON files hold:
+
+```
+cat VARUN\ PRASAD\ 11\ YRS\ MALE_DR\ SANJANA\ VSDC_2013_10_22_2D_Image_Shot_measurements.json
+{
+  "image": "/app/data/samples/VARUN PRASAD 11 YRS MALE_DR SANJANA VSDC_2013_10_22_2D_Image_Shot.jpg",
+  "processed_date": "2025-05-01T11:36:39.925429",
+  "calibration_factor": 0.1,
+  "tooth_pairs": [],
+  "summary": {
+    "total_pairs": 0,
+    "average_difference": 0
+  },
+  "analysis": {
+    "average_ratio": 0.0,
+    "std_deviation": 0.0,
+    "valid_pairs": 0
+  }
+}
+```
+
+
+
+
+## Manual Installation (without Docker)
 
 ```bash
 # Clone the repository
