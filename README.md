@@ -157,21 +157,80 @@ After batch processing, you'll find in the `results` directory:
 - `*_measurements.json`: Detailed measurement data in JSON format
 - `measurements_summary.csv`: Combined data from all images for statistical analysis
 
-## Dataset Preparation
+## Dataset Management
 
-For best results with your dataset:
+### Using Sample Images
 
-1. **Image Format**: Use high-quality JPEG, PNG, or TIFF format
-2. **Resolution**: Higher resolution provides more accurate measurements
-3. **Orientation**: Ensure panoramic radiographs are properly oriented
-4. **File Naming**: Use consistent naming (e.g., `patient001.jpg`, `patient002.jpg`)
-5. **Metadata**: Consider creating a CSV with additional information (e.g., patient age)
+The repository includes a `data/samples` directory where you can find example radiographs:
+
+```bash
+# Process a sample image
+python src/main.py --image data/samples/sample1.jpg
+```
+
+### Adding Your Own Dataset
+
+You have several options for working with your dataset:
+
+#### Option 1: Add Small Sample Images to Git
+
+For a few representative images (recommended for public repositories):
+
+```bash
+# Copy a few small sample images (anonymized) to the samples directory
+cp path/to/anonymized_sample1.jpg data/samples/
+
+# Add to Git repository
+git add data/samples/*.jpg
+git commit -m "Add anonymized sample radiographs"
+git push
+```
+
+#### Option 2: Use Git LFS for Larger Datasets
+
+For larger image sets (20-30 images), consider using [Git Large File Storage (LFS)](https://git-lfs.github.com/):
+
+```bash
+# Install Git LFS
+git lfs install
+
+# Track image files with Git LFS
+git lfs track "*.jpg" "*.png" "*.tiff"
+git add .gitattributes
+
+# Create dataset directory
+mkdir -p data/full_dataset
+
+# Add images to the dataset directory
+cp path/to/images/*.jpg data/full_dataset/
+
+# Commit and push
+git add data/full_dataset
+git commit -m "Add full radiograph dataset using Git LFS"
+git push
+```
+
+#### Option 3: Local Dataset (Not in Git)
+
+For private datasets or very large files:
+
+```bash
+# Create a directory for your dataset (not tracked by Git)
+mkdir -p data/my_radiographs
+
+# Copy your images to this directory
+cp path/to/images/*.jpg data/my_radiographs/
+
+# Ensure the directory is ignored in .gitignore (already configured)
+```
 
 ## Project Structure
 
 ```
 dental-width-predictor/
 ├── data/               # Sample radiograph images and datasets
+│   ├── samples/        # Example radiographs included in the repository
+│   └── my_radiographs/ # Your dataset (not tracked by Git)
 ├── models/             # Pre-trained models for tooth detection
 ├── notebooks/          # Jupyter notebooks for visualization and testing
 ├── src/                # Source code
