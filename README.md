@@ -136,6 +136,57 @@ The code appears to be structured to allow fallbacks to traditional computer vis
 - The classification model takes input images of size 128x128 pixels
 - Both models use standard training practices like callbacks for early stopping, learning rate reduction, and model checkpoints
 
+
+## Getting Started
+
+### Clone the repository
+
+```
+git clone https://github.com/ajeetraina/dental-width-predictor
+cd dental-width-predictor
+```
+
+### Run the Compose Service
+
+```
+docker compose up -d --build
+```
+
+Once the service is successful run, run the following command:
+
+```
+docker exec dental-width-predictor python /app/src/batch_processing.py --input /app/data/samples --output /app/results --debug
+```
+
+wait for sometime and you will find the result:
+
+
+```
+Found 46 images to process.
+
+Processing image 1/46: /app/data/samples/AVANISHK 11 YRS MALE_DR SAHEEB JAN_2013_07_22_2D_Image_Shot.jpg
+
+Processing image 2/46: /app/data/samples/PEHAL RANKA 9 YEARS FEMALE_DR RATAN SALECHA_2015_06_25_2D_Image_Shot.jpg
+
+Processing image 3/46: /app/data/samples/ANVI 10 YRS FEMALE_DR DHARMA R M_2014_05_01_2D_Image_Shot.jpg
+
+Processing image 4/46: /app/data/samples/SHAMANTH 8 YRS MALE_DR UMESH CHANDRA_2017_01_18_2D_Image_Shot (2).jpg
+
+Processing image 5/46: /app/data/samples/KANISHK 11 YERAS MALE_DR DEEPAK BOSWAN_2013_03_19_2D_Image_Shot.jpg
+
+Processing image 6/46: /app/data/samples/SIDDHANTH 8 YEARS MALE_DR AMBIKA KRISHNA_2016_11_14_2D_Image_Shot.jpg
+
+Processing image 7/46: /app/data/samples/DAYANITHA P 10 YEARS FEMALE_DR VENKATESH BABU_2015_01_24_2D_Image_Shot.jpg
+...
+
+Processing image 46/46: /app/data/samples/SARITHA 8 YRS FEMALE_DR ASHWIN C S_2017_01_01_2D_Image_Shot.jpg
+
+Summary saved to /app/results/measurements_summary.csv
+
+Processing complete!
+```
+
+
 ## Installation
 
 ```bash
