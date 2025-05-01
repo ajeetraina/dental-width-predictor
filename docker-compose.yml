@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  dental-predictor:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: dental-width-predictor
+    volumes:
+      - ./data:/app/data
+      - ./results:/app/results
+    ports:
+      - "8000:8000"
+    environment:
+      - DISPLAY=${DISPLAY}
+    command: dashboard data/samples results 8000
+    # Use 'command' to change the operation mode:
+    # For dashboard mode:
+    # command: dashboard data/samples results 8000
+    # For batch processing:
+    # command: batch data/my_radiographs results
+    # For single image processing:
+    # command: process data/samples/sample1.jpg results/output.jpg
