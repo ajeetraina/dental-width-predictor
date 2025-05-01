@@ -47,5 +47,6 @@ ENV/
 results/
 
 # Exception for sample data
-!data/sample_*.jpg
-!data/sample_*.png
+!data/samples/*.jpg
+!data/samples/*.png
+!data/samples/*.tif
