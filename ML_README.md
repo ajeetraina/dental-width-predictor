@@ -35,9 +35,107 @@ This approach has several potential advantages:
 Same as the main project, plus:
 - TensorFlow 2.x (already in requirements.txt)
 
-### Usage
+For containerized deployment:
+- [Docker](https://docs.docker.com/get-docker/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
 
-#### Running Inference with Pre-trained Models
+## Running with Docker (Recommended)
+
+The easiest way to use this application is with Docker and Docker Compose, which handle all dependencies and setup automatically.
+
+### 1. Quick Start with Docker Compose
+
+```bash
+# Clone the repository (if you haven't already)
+git clone https://github.com/ajeetraina/dental-width-predictor.git
+cd dental-width-predictor
+
+# Checkout the ML implementation branch
+git checkout ml-model-implementation
+
+# Start the application with Docker Compose
+docker-compose up
+```
+
+This will:
+- Build the Docker image with all required dependencies
+- Start the container running the dashboard application
+- Make the dashboard accessible at http://localhost:8000
+
+### 2. Using Different Operation Modes with Docker Compose
+
+You can easily switch between different operation modes by modifying the command in the docker-compose.yml file or by overriding it when running docker-compose:
+
+```bash
+# Run in dashboard mode (default)
+docker-compose up
+
+# Run batch processing on your own images
+docker-compose run --rm dental-predictor batch data/my_radiographs results
+
+# Process a single image
+docker-compose run --rm dental-predictor process data/samples/sample1.jpg results/output.jpg
+
+# Run the ML-based processing (if you have trained models)
+docker-compose run --rm dental-predictor ml-process data/samples/sample1.jpg results/output_ml.jpg
+```
+
+### 3. Working with Your Own Data
+
+To use your own dental radiographs:
+
+```bash
+# Create a directory for your images
+mkdir -p data/my_radiographs
+
+# Copy your images to the directory
+cp /path/to/your/images/*.jpg data/my_radiographs/
+
+# Process your images in batch mode
+docker-compose run --rm dental-predictor batch data/my_radiographs results
+
+# Or launch the dashboard with your images
+docker-compose run -p 8000:8000 --rm dental-predictor dashboard data/my_radiographs results 8000
+```
+
+### 4. Customizing Docker Configuration
+
+You can customize the Docker setup by modifying:
+
+- `Dockerfile` - Container image definition
+- `docker-compose.yml` - Service configuration and runtime settings
+
+For example, to change the port mapping:
+
+```yaml
+# In docker-compose.yml
+ports:
+  - "8888:8000"  # Map container port 8000 to host port 8888
+```
+
+### 5. Troubleshooting Docker
+
+If you encounter issues:
+
+```bash
+# Check if the container is running
+docker ps
+
+# View container logs
+docker-compose logs
+
+# Rebuild the image after changes
+docker-compose build
+
+# Remove old containers and volumes
+docker-compose down -v
+```
+
+## Usage Without Docker
+
+If you prefer to run the application directly on your system:
+
+### Running Inference with Pre-trained Models
 
 ```bash
 # Process a single image using ML models
@@ -50,7 +148,7 @@ python src/ml_main.py --image data/samples/sample1.jpg --output results/sample1_
 python src/ml_main.py --image data/samples/sample1.jpg --output results/sample1_ml.jpg --fallback
 ```
 
-#### Training Your Own Models
+### Training Your Own Models
 
 To train the models with your own data:
 
