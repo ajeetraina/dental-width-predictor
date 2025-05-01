@@ -113,19 +113,22 @@ class Input,Output data;
 
 The project uses two TensorFlow models for the tooth detection and classification:
 
-- Segmentation Model - A semantic segmentation model that detects and segments individual teeth in dental radiographs. This model takes the full radiograph as input and produces a segmentation mask with 3 classes:
+### Segmentation Model
+
+A semantic segmentation model that detects and segments individual teeth in dental radiographs. This model takes the full radiograph as input and produces a segmentation mask with 3 classes:
 
 - Class 0: Background
 - Class 1: Primary Molar (deciduous/baby tooth)
 - Class 2: Premolar (permanent/adult tooth)
 
 
-- Classification Model - A convolutional neural network that classifies the individual tooth regions into different types (primary_molar, premolar, or other).
+### Classification Model
+
+A convolutional neural network that classifies the individual tooth regions into different types (primary_molar, premolar, or other).
 
 The models are imported from a models/model.py file which appears to be missing from the repository. 
 Based on the imports and usage patterns in the code, the functions `create_segmentation_model` and `create_tooth_classifier` would define the specific architectures.
 The code appears to be structured to allow fallbacks to traditional computer vision techniques if the models aren't available, suggesting this is still in development.
-
 
 
 - Both models are trained using TensorFlow/Keras
