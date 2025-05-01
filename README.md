@@ -139,6 +139,10 @@ The code appears to be structured to allow fallbacks to traditional computer vis
 
 ## Getting Started
 
+### Prereq
+
+- Install Docker Desktop
+
 ### Clone the repository
 
 ```
