@@ -1,0 +1,52 @@
+# Git
+.git
+.gitignore
+
+# Docker
+.docker
+.dockerignore
+Dockerfile*
+docker-compose*
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environment
+venv/
+ENV/
+
+# IDE settings
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Large files and results
+data/my_radiographs/*
+results/*
+!data/samples/
+!data/my_radiographs/.gitkeep
+!results/.gitkeep
+
+# OS specific
+.DS_Store
+Thumbs.db
