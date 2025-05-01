@@ -10,7 +10,7 @@ in dental radiograph images.
 
 import cv2
 import numpy as np
-from skimage import feature, morphology, measure, segmentation, filters
+from skimage import feature, morphology, measure, segmentation, filters, exposure
 from scipy import ndimage  # Import this for distance_transform_edt
 
 
