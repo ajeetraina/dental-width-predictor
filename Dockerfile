@@ -46,6 +46,12 @@ elif [ "$1" = "batch" ]; then\n\
 elif [ "$1" = "process" ]; then\n\
     # Process a single image\n\
     python src/main.py --image $2 --output $3 ${@:4}\n\
+elif [ "$1" = "ml-process" ]; then\n\
+    # Process a single image using ML model\n\
+    python src/ml_main.py --image $2 --output $3 ${@:4}\n\
+elif [ "$1" = "ml-train" ]; then\n\
+    # Train the ML models\n\
+    python src/training/train_models.py --data $2 --models $3 ${@:4}\n\
 else\n\
     # Default: print usage\n\
     echo "Dental Width Predictor"\n\
@@ -54,7 +60,10 @@ else\n\
     echo "  dashboard <input_dir> <results_dir> [port]  - Run the interactive dashboard"\n\
     echo "  batch <input_dir> <output_dir> [options]    - Process multiple images"\n\
     echo "  process <image_path> <output_path> [options] - Process a single image"\n\
-    echo "\nFor more options, see the README.md"\n\
+    echo "  ml-process <image_path> <output_path> [options] - Process using ML models"\n\
+    echo "  ml-train <data_dir> <models_dir> [options]  - Train ML models"\n\
+    echo ""\n\
+    echo "For more options, see the README.md or ML_README.md"\n\
 fi' > /app/entrypoint.sh && chmod +x /app/entrypoint.sh
 
 # Set the entry point
