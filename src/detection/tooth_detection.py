@@ -22,8 +22,8 @@ def detect_teeth(image):
     Returns:
         list: List of contours representing detected teeth
     """
-    # Edge detection
-    edges = feature.canny(image, sigma=3)
+    # Edge detection with reduced sigma for better sensitivity
+    edges = feature.canny(image, sigma=2)
     
     # Dilate edges to close gaps
     dilated = morphology.dilation(edges, morphology.disk(3))
@@ -34,9 +34,9 @@ def detect_teeth(image):
     # Label connected components
     labeled = measure.label(filled)
     
-    # Filter components by size to remove noise
+    # Filter components by size to remove noise - more permissive thresholds
     props = measure.regionprops(labeled)
-    filtered_labels = [prop.label for prop in props if prop.area > 500 and prop.area < 10000]
+    filtered_labels = [prop.label for prop in props if prop.area > 200 and prop.area < 15000]
     
     # Extract contours for the filtered regions
     contours = []
@@ -126,7 +126,9 @@ def merge_overlapping_contours(contours, threshold=0.3):
                 
             # Calculate overlap
             intersection = cv2.bitwise_and(current_mask, masks[j])
-            overlap = np.sum(intersection > 0) / np.sum(current_mask > 0)
+            # Fix division by zero error by adding a small epsilon or using max function
+            denominator = max(np.sum(current_mask > 0), 1)  # Prevent division by zero
+            overlap = np.sum(intersection > 0) / denominator
             
             if overlap > threshold:
                 # Merge the contours
