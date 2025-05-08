@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dental Width Predictor Batch Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header { background-color: #4CAF50; color: white; padding: 20px; text-align: center; }
+        .summary { display: flex; justify-content: space-around; margin: 20px 0; }
+        .summary-box { background-color: #f1f1f1; padding: 15px; border-radius: 5px; width: 22%; text-align: center; }
+        .summary-box h3 { margin-top: 0; }
+        .severity-normal { background-color: #8BC34A; }
+        .severity-mild { background-color: #FFC107; }
+        .severity-moderate { background-color: #FF9800; }
+        .severity-severe { background-color: #F44336; color: white; }
+        .results-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        .results-table th, .results-table td { padding: 8px; text-align: left; border-bottom: 1px solid #ddd; }
+        .results-table th { background-color: #4CAF50; color: white; }
+        .results-table tr:hover { background-color: #f5f5f5; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Dental Width Predictor Batch Dashboard</h1>
+            <p>Generated on {{ analysis_date }}</p>
+        </div>
+        
+        <div class="summary">
+            <div class="summary-box">
+                <h3>Total Images</h3>
+                <p>{{ total_images }}</p>
+            </div>
+            <div class="summary-box">
+                <h3>Total Tooth Pairs</h3>
+                <p>{{ total_pairs }}</p>
+            </div>
+            <div class="summary-box">
+                <h3>Average Difference</h3>
+                <p>{{ average_difference|round(2) }} mm</p>
+            </div>
+            <div class="summary-box">
+                <h3>Needs Intervention</h3>
+                <p>{{ intervention_needed }} images</p>
+            </div>
+        </div>
+        
+        <h2>Severity Distribution</h2>
+        <div class="summary">
+            <div class="summary-box severity-normal">
+                <h3>Normal</h3>
+                <p>{{ severity_counts['normal'] }}</p>
+            </div>
+            <div class="summary-box severity-mild">
+                <h3>Mild</h3>
+                <p>{{ severity_counts['mild'] }}</p>
+            </div>
+            <div class="summary-box severity-moderate">
+                <h3>Moderate</h3>
+                <p>{{ severity_counts['moderate'] }}</p>
+            </div>
+            <div class="summary-box severity-severe">
+                <h3>Severe</h3>
+                <p>{{ severity_counts['severe'] }}</p>
+            </div>
+        </div>
+        
+        <h2>Results Summary</h2>
+        <table class="results-table">
+            <tr>
+                <th>Image</th>
+                <th>Pairs</th>
+                <th>Avg. Difference</th>
+                <th>Highest Severity</th>
+                <th>Needs Intervention</th>
+                <th>View Report</th>
+            </tr>
+            {% for row in table_data %}
+            <tr {% if row.highest_severity == "severe" %}class="severity-severe"{% elif row.highest_severity == "moderate" %}class="severity-moderate"{% elif row.highest_severity == "mild" %}class="severity-mild"{% endif %}>
+                <td>{{ row.image_name }}</td>
+                <td>{{ row.pairs_count }}</td>
+                <td>{{ row.avg_diff|round(2) }} mm</td>
+                <td>{{ row.highest_severity|upper }}</td>
+                <td>{{ row.needs_intervention|yesno }}</td>
+                <td><a href="{{ row.image_name|replace('.jpg', '_clinical_report.html')|replace('.png', '_clinical_report.html') }}">View Report</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        
+        <div style="margin-top: 30px; padding: 10px; background-color: #f8f9fa; border-radius: 5px;">
+            <h2>Understanding the Results</h2>
+            <ul>
+                <li><strong>Normal:</strong> Width differences are within normal ranges for the tooth's position.</li>
+                <li><strong>Mild:</strong> Small deviations from normal range that may require monitoring.</li>
+                <li><strong>Moderate:</strong> Significant deviations that may require orthodontic consultation.</li>
+                <li><strong>Severe:</strong> Large deviations that likely require intervention.</li>
+            </ul>
+            <p>This report was automatically generated. The measurements and recommendations should be confirmed by a qualified dental professional.</p>
+        </div>
+    </div>
+</body>
+</html>
