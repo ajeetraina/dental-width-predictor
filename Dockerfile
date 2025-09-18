@@ -3,14 +3,18 @@ FROM python:3.9-slim
 # Set working directory
 WORKDIR /app
 
-# Install system dependencies
+# Install system dependencies for headless OpenCV
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    libgl1-mesa-glx \
     libglib2.0-0 \
     libsm6 \
     libxrender1 \
     libxext6 \
     libfontconfig1 \
+    libgomp1 \
+    libgl1-mesa-dri \
+    libglu1-mesa \
+    libgl1 \
+    libxcb1 \
     git \
     && rm -rf /var/lib/apt/lists/*
 
@@ -20,8 +24,9 @@ COPY requirements.txt .
 # Fix webbrowser requirement (it's a standard library, not a pip package)
 RUN sed -i '/webbrowser>=0.10.0/d' requirements.txt
 
-# Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+# Install Python dependencies with headless OpenCV
+RUN pip install --no-cache-dir opencv-python-headless && \
+    pip install --no-cache-dir -r requirements.txt
 
 # Copy the application code
 COPY . .
@@ -29,11 +34,13 @@ COPY . .
 # Create necessary directories
 RUN mkdir -p data/samples data/my_radiographs models results
 
+# Set environment variables for headless operation
+ENV DISPLAY=""
+ENV QT_X11_NO_MITSHM=1
+ENV PYTHONPATH="${PYTHONPATH}:/app"
+
 # Expose the port that dashboard.py might use
 EXPOSE 8000 8080
-
-# Set environment variables
-ENV PYTHONPATH="${PYTHONPATH}:/app"
 
 # Create entry point script
 RUN echo '#!/bin/bash\n\
