@@ -210,28 +210,6 @@ dashboard.html
 measurements_summary.csv
 ```
 
-Let's verify what content does these JSON files hold:
-
-```
-cat VARUN\ PRASAD\ 11\ YRS\ MALE_DR\ SANJANA\ VSDC_2013_10_22_2D_Image_Shot_measurements.json
-{
-  "image": "/app/data/samples/VARUN PRASAD 11 YRS MALE_DR SANJANA VSDC_2013_10_22_2D_Image_Shot.jpg",
-  "processed_date": "2025-05-01T11:36:39.925429",
-  "calibration_factor": 0.1,
-  "tooth_pairs": [],
-  "summary": {
-    "total_pairs": 0,
-    "average_difference": 0
-  },
-  "analysis": {
-    "average_ratio": 0.0,
-    "std_deviation": 0.0,
-    "valid_pairs": 0
-  }
-}
-```
-
-
 
 
 ## Manual Installation (without Docker)
