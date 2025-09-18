@@ -5,12 +5,13 @@ WORKDIR /app
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    libgl1-mesa-glx \
+    libgl1-mesa-dri \
     libglib2.0-0 \
     libsm6 \
     libxrender1 \
     libxext6 \
     libfontconfig1 \
+    libgomp1 \
     git \
     && rm -rf /var/lib/apt/lists/*
 
