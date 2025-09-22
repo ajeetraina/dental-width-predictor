@@ -370,48 +370,10 @@ graph LR
 - [ ] AI-powered treatment recommendations
 - [ ] Population-based normative data integration
 
-## 📄 **License**
 
-MIT License - see LICENSE file for details
 
-## 🤝 **Contributing**
 
-Contributions are welcome! Areas where help is especially appreciated:
 
-### **High Priority**
-- [ ] **Manual annotation** of sample images for training data
-- [ ] **Clinical validation** with dental professionals  
-- [ ] **Performance optimization** for larger datasets
-- [ ] **Unit tests** and automated testing
-
-### **Medium Priority**  
-- [ ] **Additional calibration methods** (automatic scale detection)
-- [ ] **Web UI improvements** for the dashboard
-- [ ] **Documentation** and user guides
-- [ ] **Docker optimization** for smaller image size
-
-### **Contributing Guidelines**
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Make your changes and test thoroughly
-4. Commit your changes (`git commit -m 'Add amazing feature'`)
-5. Push to the branch (`git push origin feature/amazing-feature`)
-6. Open a Pull Request
-
-## 📧 **Support & Contact**
-
-- **Issues**: [GitHub Issues](https://github.com/ajeetraina/dental-width-predictor/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/ajeetraina/dental-width-predictor/discussions)  
-- **Email**: ajeetraina@gmail.com
-- **Docker**: [@ajeetsraina](https://twitter.com/ajeetsraina)
-
-## 🏆 **Acknowledgments**
-
-- **Docker Community** for containerization support
-- **OpenCV Community** for computer vision algorithms
-- **TensorFlow Team** for machine learning framework
-- **Dental Professionals** who provided domain expertise
-- **Contributors** who helped test and validate the system
 
 ---
 
