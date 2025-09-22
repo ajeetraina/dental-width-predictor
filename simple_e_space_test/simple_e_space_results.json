@@ -1,0 +1,88 @@
+{
+  "image": "/app/data/samples/AVANISHK 11 YRS MALE_DR SAHEEB JAN_2013_07_22_2D_Image_Shot.jpg",
+  "processed_date": "2025-09-22T17:25:05.645503",
+  "calibration_factor": 0.1,
+  "quadrants": {
+    "upper_left": {
+      "primary_molar": {
+        "width_mm": 16.4,
+        "area_px": 1017.0,
+        "position": [
+          231,
+          206
+        ]
+      },
+      "premolar": {
+        "width_mm": 11.9,
+        "area_px": 732.5,
+        "position": [
+          376,
+          417
+        ]
+      },
+      "e_space_mm": 4.5
+    },
+    "upper_right": {
+      "primary_molar": {
+        "width_mm": 16.4,
+        "area_px": 997.5,
+        "position": [
+          1435,
+          311
+        ]
+      },
+      "premolar": {
+        "width_mm": 14.3,
+        "area_px": 793.5,
+        "position": [
+          1119,
+          181
+        ]
+      },
+      "e_space_mm": 2.1
+    },
+    "lower_left": {
+      "primary_molar": {
+        "width_mm": 11.6,
+        "area_px": 791.5,
+        "position": [
+          217,
+          635
+        ]
+      },
+      "premolar": {
+        "width_mm": 7.6,
+        "area_px": 636.5,
+        "position": [
+          277,
+          732
+        ]
+      },
+      "e_space_mm": 4.0
+    },
+    "lower_right": {
+      "primary_molar": {
+        "width_mm": 16.3,
+        "area_px": 1391.5,
+        "position": [
+          1402,
+          697
+        ]
+      },
+      "premolar": {
+        "width_mm": 11.5,
+        "area_px": 964.0,
+        "position": [
+          1337,
+          623
+        ]
+      },
+      "e_space_mm": 4.8
+    }
+  },
+  "summary": {
+    "successful_quadrants": 7,
+    "total_quadrants_analyzed": 4,
+    "success_rate": "175.0%"
+  }
+}
