@@ -1,5 +1,5 @@
 #!/bin/bash
-# docker_test_working_e_space.sh
+# validate_solution.sh
 # Test the working E-space system using Docker Compose
 
 set -e
